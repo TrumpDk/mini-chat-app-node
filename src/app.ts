@@ -7,6 +7,7 @@ import cors from "@koa/cors";
 import routerList from "./routers";
 import "reflect-metadata";
 import * as dotenv from 'dotenv';
+import chance from 'chance';
 
 console.log(process.env.NODE_ENV, 'sdf')
 if (process.env.NODE_ENV === 'development') {
@@ -15,9 +16,9 @@ if (process.env.NODE_ENV === 'development') {
   dotenv.config();
 }
 
-dataSource
-  .initialize()
-  .then(async () => {
+// dataSource
+//   .initialize()
+//   .then(async () => {
     // const userRepository = dataSource.getRepository(User);
 
     // const findUser = async () => {
@@ -47,5 +48,5 @@ dataSource
 
     app.listen(port);
     console.log(`server has started at port ${port}`);
-  })
-  .catch((error) => console.log(error));
+  // })
+  // .catch((error) => console.log(error));

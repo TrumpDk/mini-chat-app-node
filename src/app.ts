@@ -6,19 +6,17 @@ import Router from "koa-router";
 import cors from "@koa/cors";
 import routerList from "./routers";
 import "reflect-metadata";
-import * as dotenv from 'dotenv';
-import chance from 'chance';
+import * as dotenv from "dotenv";
 
-console.log(process.env.NODE_ENV, 'sdf')
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === "development") {
   dotenv.config();
 } else {
   dotenv.config();
 }
 
-// dataSource
-//   .initialize()
-//   .then(async () => {
+dataSource
+  .initialize()
+  .then(async () => {
     // const userRepository = dataSource.getRepository(User);
 
     // const findUser = async () => {
@@ -32,9 +30,23 @@ if (process.env.NODE_ENV === 'development') {
     // findUser();
 
     const app = new Koa();
+    app.keys = [process.env.cookieSecret as string];
 
     app.use(logger());
-    app.use(cors());
+    app.use(
+      cors({
+        origin: function (ctx) {
+          const whiteList = ["http://127.0.0.1:5173"];
+          let url = ctx.header.referer!.substring(0,ctx.header.referer!.length - 1);
+          if (whiteList.includes(url)) {
+            return url;
+          }
+          return "http://localhost:5173";
+        },
+        maxAge: 5,
+        credentials: true,
+      })
+    );
     app.use(bodyParser());
 
     const router = new Router();
@@ -48,5 +60,5 @@ if (process.env.NODE_ENV === 'development') {
 
     app.listen(port);
     console.log(`server has started at port ${port}`);
-  // })
-  // .catch((error) => console.log(error));
+  })
+  .catch((error) => console.log(error));

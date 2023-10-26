@@ -1,8 +1,12 @@
 import { Middleware } from 'koa';
-import { nanoid } from "nanoid";
-import { OIDCConfigType } from '../types';
 
 const userRegisterController: Middleware = (ctx, next) => {
+    const {id, password, nickName} = ctx.request.body as {id: number, password: string, nickName: string};
+    if (!id || password || nickName) {
+        ctx.throw(400)
+    } else {
+        
+    }
 }
 
 export default userRegisterController;

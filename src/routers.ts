@@ -14,6 +14,11 @@ const routerList: RouterListType[] = [
     method: "post",
     middleware: [authCallBackController],
   },
+  {
+    path: "/register",
+    method: "post",
+    middleware: [authCallBackController],
+  },
 ];
 
 export default routerList;

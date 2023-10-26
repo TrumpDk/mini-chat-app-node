@@ -7,6 +7,7 @@ import cors from "@koa/cors";
 import routerList from "./routers";
 import "reflect-metadata";
 import * as dotenv from "dotenv";
+import { errorHandler } from "./middleWares/errorHandler";
 
 if (process.env.NODE_ENV === "development") {
   dotenv.config();
@@ -57,6 +58,7 @@ dataSource
 
     app.use(router.routes());
     app.use(router.allowedMethods());
+    app.use(errorHandler)
 
     app.listen(port);
     console.log(`server has started at port ${port}`);

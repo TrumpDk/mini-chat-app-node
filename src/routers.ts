@@ -1,6 +1,7 @@
 import { RouterListType } from "./types";
 import loginController from "./controller/loginController";
 import authCallBackController from "./controller/authCallBackController";
+import userRegisterController from "./controller/userRegisterController";
 
 // router list table, which
 const routerList: RouterListType[] = [
@@ -17,7 +18,7 @@ const routerList: RouterListType[] = [
   {
     path: "/register",
     method: "post",
-    middleware: [authCallBackController],
+    middleware: [userRegisterController],
   },
 ];
 

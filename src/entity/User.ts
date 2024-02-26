@@ -11,6 +11,6 @@ export class User {
     @Column('varchar', {name: 'U_Nick_Name'})
     uNikename: string;
 
-    @Column('int', {name: 'U_Password'})
-    uPassword: number;
+    @Column('varchar', {name: 'U_Password'})
+    uPassword: string;
 }
